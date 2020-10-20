@@ -1,8 +1,8 @@
 import React from 'react';
 import { UserHand, CardsPile } from './components';
 import CardInfo from './common/CardInfo';
-import './App.css';
 import PlayerCard from './common/PlayerCard';
+import './App.css';
 
 function App() {
   return (

@@ -7,3 +7,9 @@ body {
   margin: 0;
   background-image: url("resources/poker-table-background-green-color.jpg");  
 }
+
+.cards-pile{
+  position: absolute;
+  top: 30%;
+  right: 40%;
+}
