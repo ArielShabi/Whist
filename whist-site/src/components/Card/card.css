@@ -1,0 +1,6 @@
+.card , .card img{
+    height: 100%;
+}
+.card{
+    margin: 0 0.5em 0 0.5em;
+}
