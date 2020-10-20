@@ -1,12 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import Card from '../Card';
+import CardInfo from '../../common/CardInfo';
 import './user-hand.css';
-import Card from '../Card/Card';
-import { CardInfo } from '../../common/CardInfo';
 
-const UserHand = (props) => (
-    <div className="user-hand">
-        <Card cardInfo={new CardInfo(5,'C')}/>
-    </div>
-);
+const UserHand = ({ cards }) => {
+    const cardsComponents =
+        cards.map((card, index) => (
+            <Card key={index} cardInfo={card} />
+        ))
+
+
+    return (
+        <div className="user-hand">
+            {cardsComponents}
+        </div>
+    )
+};
+
+UserHand.propTypes = {
+    cards: PropTypes.arrayOf(PropTypes.instanceOf(CardInfo)).isRequired
+}
 
 export default UserHand;
