@@ -1,3 +1,7 @@
-import UserHand from './UserHand';;
+import CardsPile from './CardsPile';
+import UserHand from './UserHand';
 
-export default UserHand;
+export {
+    UserHand,
+    CardsPile
+};
