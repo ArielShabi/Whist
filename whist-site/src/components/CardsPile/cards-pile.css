@@ -1,0 +1,37 @@
+.cards-pile {
+    display: inline-grid;
+    grid-template-columns: repeat(3, calc(8em/1.5));
+    grid-template-rows: repeat(8, 2em);
+}
+
+.cards-pile-player-card {
+    background-color: purple;
+}
+
+.cards-pile-player-card .card img{
+    width: 100%;
+}
+
+#player-card-id0.cards-pile-player-card {
+    grid-row-start: 5;
+    grid-row-end: 9;
+    grid-column: 2;
+}
+
+#player-card-id1.cards-pile-player-card {
+    grid-row-start: 3;
+    grid-row-end: 7;
+    grid-column: 1;
+}
+
+#player-card-id2.cards-pile-player-card {
+    grid-row-start: 1;
+    grid-row-end: 5;
+    grid-column: 2;
+}
+
+#player-card-id3.cards-pile-player-card {
+    grid-row-start: 3;
+    grid-row-end: 7;
+    grid-column: 3;
+}
