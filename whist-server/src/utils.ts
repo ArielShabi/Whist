@@ -20,7 +20,7 @@ const getRandomName = () => {
     return name;
 };
 
-module.exports = {
+export {
     tryParseJson,
     getRandomName
 }

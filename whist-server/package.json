@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "build": "babel --extensions .ts src -d lib",
+    "start": "node lib/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,5 +14,12 @@
     "uniqid": "^5.2.0",
     "unique-names-generator": "^4.3.1",
     "ws": "^7.3.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.8",
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-typescript": "^7.12.7",
+    "typescript": "^4.1.2"
   }
 }

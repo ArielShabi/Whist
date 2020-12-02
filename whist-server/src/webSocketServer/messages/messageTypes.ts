@@ -6,8 +6,7 @@ const userRemovedMessageType = 'USER_REMOVED';
 const userEditedMessageType = 'USER_EDITED';
 const otherUserEditedMessageTyped = 'OTHER_USER_EDITED';
 
-module.exports = {
-    broadcastMessageType,
+export {
     editUserInfoMessageType,
     getRandomNameMessageType,
     usersJoinedMessageType,

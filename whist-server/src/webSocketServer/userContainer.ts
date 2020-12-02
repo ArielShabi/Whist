@@ -1,6 +1,6 @@
-const WebSocket = require('ws');
-const uniqid = require('uniqid');
-const { getRandomName } = require('../utils');
+import WebSocket from 'ws';
+import uniqid from 'uniqid';
+import { getRandomName } from '../utils';
 
 const userContainer = () => {
     let users = [];
@@ -40,4 +40,4 @@ const userContainer = () => {
     };
 }
 
-module.exports = userContainer;
+export default userContainer;
