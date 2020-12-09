@@ -1,5 +1,5 @@
 const editUserInfoMessageType = 'EDIT_USER_INFO';
-const getRandomNameMessageType = 'GET_RANDON_NAME';
+const getRandomNameMessageType = 'GET_RANDOM_NAME';
 
 const usersJoinedMessageType = 'USERS_JOINED';
 const userRemovedMessageType = 'USER_REMOVED';

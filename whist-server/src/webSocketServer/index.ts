@@ -1,34 +1,35 @@
-const WebSocket = require('ws');
-const createUserContainer = require('./userContainer');
+import { Server } from 'ws';
+import createUserContainer from './userContainer';
+import { tryParseJson } from '../utils';
 
 const startWebSocketServer = (httpServer) => {
-    const webSocketServer = new WebSocket.Server({ server: httpServer });
+    const webSocketServer = new Server({ server: httpServer });
     const userContainer = createUserContainer();
 
     webSocketServer.on('connection', webSocketConnection => {
         const userId = userContainer.addUser(webSocketConnection);
-        let currentUser = userContainer.getUser(userId);
+        let currentUser = userContainer.getUser(userId);        
 
         webSocketConnection.on('message', rawMessage => {
-            const parsedMessage = utils.tryParseJson(rawMessage);
+            const parsedMessage = tryParseJson(rawMessage);
 
             if (!parsedMessage) {
                 return;
             }
 
-            messageHandlers.handleMessage(parsedMessage, userId, userContainer);
+            //messageHandlers.handleMessage(parsedMessage, userId, userContainer);
         });
 
         webSocketConnection.on('close', (code, reason) => {
             userContainer.removeUser(userId);
-            const userRemovedMessage = messageCreator.createServerMessage(userRemovedMessageType, { id: userId })
-            userContainer.getAllOpenUsers().forEach(user => user.connection.send(userRemovedMessage));
+            // const userRemovedMessage = messageCreator.createServerMessage(userRemovedMessageType, { id: userId })
+            // userContainer.getAllOpenUsers().forEach(user => user.connection.send(userRemovedMessage));
         });
     });
 
     return webSocketServer;
 }
 
-module.exports = {
+export default {
     startWebSocketServer
 };

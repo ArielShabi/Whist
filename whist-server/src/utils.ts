@@ -1,5 +1,5 @@
-const { uniqueNamesGenerator, adjectives, animals } = require('unique-names-generator');
-const config = require('./config');
+import { uniqueNamesGenerator, adjectives, animals } from 'unique-names-generator';
+import config from './config';
 
 const tryParseJson = str => {
     try {

@@ -1,9 +1,9 @@
-import WebSocket from 'ws';
 import uniqid from 'uniqid';
-import { getRandomName } from '../utils';
+import { getRandomName } from '../../utils';
+import { User } from './types';
 
 const userContainer = () => {
-    let users = [];
+    let users: User[] = [];
 
     const addUser = connection => {
         const id = uniqid();
@@ -22,7 +22,7 @@ const userContainer = () => {
 
     const editUser = (id, newUserData) => {
         const userToEditIndex = users.findIndex(user => user.id === id);
-        const userToEdit = users[userToEditIndex];
+        const userToEdit = users[userToEditIndex];        
         users[userToEditIndex] = { ...userToEdit, ...newUserData };
         return users[userToEditIndex];
     }
