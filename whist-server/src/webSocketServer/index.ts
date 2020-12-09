@@ -1,14 +1,16 @@
-import { Server } from 'ws';
+import { Server } from 'http';
+import { Server as WebSocketServer } from 'ws';
 import createUserContainer from './userContainer';
 import { tryParseJson } from '../utils';
 
-const startWebSocketServer = (httpServer) => {
-    const webSocketServer = new Server({ server: httpServer });
+const startWebSocketServer = (httpServer: Server) => {
+    const webSocketServer = new WebSocketServer({ server: httpServer });
     const userContainer = createUserContainer();
 
     webSocketServer.on('connection', webSocketConnection => {
+        //@ts-ignore
         const userId = userContainer.addUser(webSocketConnection);
-        let currentUser = userContainer.getUser(userId);        
+        const currentUser = userContainer.getUser(userId);
 
         webSocketConnection.on('message', rawMessage => {
             const parsedMessage = tryParseJson(rawMessage);

@@ -5,7 +5,7 @@ import { User } from './types';
 const userContainer = () => {
     let users: User[] = [];
 
-    const addUser = (connection: WebSocket): string => {
+    const addUser = (connection: WebSocket): string => {        
         const id: string = uniqid();
         const name = getRandomName();
 
