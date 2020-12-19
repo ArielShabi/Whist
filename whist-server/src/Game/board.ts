@@ -5,7 +5,7 @@ const createBoard = (users: PlayingUser[], strongSuit: CardSuits) => {
     const cards: PlayerCard[] = [];
 
     const playCard = (card: PlayerCard): void => {
-        const isSpaceTaken = cards.some(playerCard => playerCard.id === card.id);
+        const isSpaceTaken = cards.some(playerCard => playerCard.player.id === card.player.id);
 
         if (isSpaceTaken) {
             throw new Error(`Player all ready played card ${card}`);
@@ -39,7 +39,7 @@ const createBoard = (users: PlayingUser[], strongSuit: CardSuits) => {
             return playerCard.suit === strongSuit ? playerCard : currentWinner;
         }, cards[0]);
 
-        return winner;
+        return winner.player;
     };
 
     return {

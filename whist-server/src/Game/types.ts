@@ -17,4 +17,6 @@ export type PlayingUser = User & {
     cards: Card[]
 }
 
-export type PlayerCard = Card & UserInfo
+export type PlayerCard = Card & {
+    player: UserInfo
+}
