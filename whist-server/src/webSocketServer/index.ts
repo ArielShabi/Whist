@@ -1,6 +1,8 @@
 import { Server } from 'http';
 import { Server as WebSocketServer } from 'ws';
 import createUserContainer from './userContainer';
+import { Message } from './messages/types';
+import messageHandler from './messageHandler';
 import { tryParseJson } from '../utils';
 
 const startWebSocketServer = (httpServer: Server) => {
@@ -13,13 +15,13 @@ const startWebSocketServer = (httpServer: Server) => {
         const currentUser = userContainer.getUser(userId);
 
         webSocketConnection.on('message', rawMessage => {
-            const parsedMessage = tryParseJson(rawMessage);
+            const parsedMessage = tryParseJson<Message>(rawMessage.toString());
 
             if (!parsedMessage) {
                 return;
             }
 
-            //messageHandlers.handleMessage(parsedMessage, userId, userContainer);
+            messageHandler.handleMessage(parsedMessage);
         });
 
         webSocketConnection.on('close', (code, reason) => {
