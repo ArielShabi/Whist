@@ -1,4 +1,5 @@
 import { CardSuits, PlayerCard, PlayingUser } from './types';
+import { UserInfo } from '../types';
 
 const createBoard = (users: PlayingUser[], strongSuit: CardSuits) => {
     const cards: PlayerCard[] = [];
@@ -13,6 +14,10 @@ const createBoard = (users: PlayingUser[], strongSuit: CardSuits) => {
         cards.push(card);
     };
 
+    const getBoardState = (): PlayerCard[] =>(
+        cards
+    );
+    
     const resetBoard = (): void => {
         cards.splice(0, cards.length);
     };
@@ -21,7 +26,7 @@ const createBoard = (users: PlayingUser[], strongSuit: CardSuits) => {
         return cards.length === users.length;
     };
 
-    const getRoundWinner = (): string => {
+    const getRoundWinner = (): UserInfo => {
         if (!isBoardFull()) {
             throw new Error('Cannot decide on winner if board is not full');
         }
@@ -34,11 +39,12 @@ const createBoard = (users: PlayingUser[], strongSuit: CardSuits) => {
             return playerCard.suit === strongSuit ? playerCard : currentWinner;
         }, cards[0]);
 
-        return winner.id;
+        return winner;
     };
 
     return {
         playCard,
+        getBoardState,
         resetBoard,
         isBoardFull,
         getRoundWinner
