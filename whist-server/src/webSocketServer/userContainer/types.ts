@@ -1,5 +1,5 @@
-export type User = {
-    id: string;
-    name: string;
-    connection: WebSocket;
+import { UserInfo } from "../../types";
+
+export type User = UserInfo & {        
+    connection: WebSocketClient;
 }
