@@ -3,7 +3,7 @@ import { CardSuits, PlayerCard, PlayingUser } from './types';
 const createBoard = (users: PlayingUser[], strongSuit: CardSuits) => {
     const cards: PlayerCard[] = [];
 
-    const playCard = (card: PlayerCard): string => {
+    const playCard = (card: PlayerCard): void => {
         const isSpaceTaken = cards.some(playerCard => playerCard.id === card.id);
 
         if (isSpaceTaken) {
@@ -11,10 +11,6 @@ const createBoard = (users: PlayingUser[], strongSuit: CardSuits) => {
         }
 
         cards.push(card);
-        const userSeatNumber = users.findIndex(user => user.id == card.id);
-        const nextUser = users[(userSeatNumber + 1) % users.length];
-
-        return nextUser.id;
     };
 
     const resetBoard = (): void => {
