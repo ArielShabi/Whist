@@ -1,4 +1,5 @@
 import { UserInfo } from '../types'
+import { User } from '../webSocketServer/userContainer/types'
 
 export enum CardSuits {
     Club,
@@ -12,8 +13,8 @@ export type Card = {
     suit: CardSuits
 }
 
-export type PlayingUser = UserInfo & {
-
+export type PlayingUser = User & {
+    cards: Card[]
 }
 
 export type PlayerCard = Card & UserInfo
