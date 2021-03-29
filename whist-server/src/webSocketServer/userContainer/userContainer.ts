@@ -1,17 +1,17 @@
 import uniqid from 'uniqid';
+import { User, UserContainer } from './types';
 import { getRandomName } from '../../utils';
-import { User } from './types';
 
-const userContainer = () => {
+const userContainer = (): UserContainer => {
     let users: User[] = [];
 
-    const addUser = (connection: WebSocket): string => {        
+    const addUser = (connection: WebSocket): string => {
         const id: string = uniqid();
         const name = getRandomName();
 
         users.push({
             id,
-            connection,
+            connection: new WebSocketClient(connection),
             name
         });
 
@@ -36,7 +36,7 @@ const userContainer = () => {
     };
 
     const getAllOpenUsers = (idToExclude: string): User[] => {
-        return users.filter(user => user.id != idToExclude && user.connection.readyState == WebSocket.OPEN);
+        return users.filter(user => user.id != idToExclude && user.connection.isReady);
     }
 
     return {

@@ -10,4 +10,8 @@ class WebSocketClient {
 
         this.connection.send(message);
     }
+
+    isReady() {
+        return this.connection.readyState === WebSocket.OPEN;
+    }
 }
