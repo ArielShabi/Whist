@@ -11,7 +11,7 @@ class WebSocketClient {
         this.connection.send(message);
     }
 
-    isReady() {
+    get isReady() {
         return this.connection.readyState === WebSocket.OPEN;
     }
 }

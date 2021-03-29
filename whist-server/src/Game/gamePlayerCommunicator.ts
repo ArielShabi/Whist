@@ -1,31 +1,31 @@
 import { PlayerCard } from './types';
 import { UserInfo } from '../types';
 import { cardPlayedType, requestCardType, roundWonType } from '../webSocketServer/messages/messageTypes'
-import { User } from '../webSocketServer/userContainer/types';
+import { User, UserContainer } from '../webSocketServer/userContainer/types';
 
-const requestCard = (user: User): void => {
-    user.connection.sendMessage(requestCardType);
-};
+const gamePlayerCommunicator = (users: UserContainer) => {
 
-const cardPlayed = (users: User[], playerCard: PlayerCard): void => {
-    users.forEach((user) => {
-        user.connection.sendMessage(cardPlayedType, playerCard);
-    });
-};
-
-const roundWon = (users: User[], winningPlayer: UserInfo, board: PlayerCard[]): void => {
-    const message = {
-        winningPlayer,
-        board
+    const requestCard = (userId: string): void => {
+        users.getUser(userId).connection.sendMessage(requestCardType);
     };
 
-    users.forEach((user) => {
-        user.connection.sendMessage(roundWonType, message);
-    });
+    const cardPlayed = (playerCard: PlayerCard): void => {
+        users.getAllOpenUsers().forEach((user) => {
+            user.connection.sendMessage(cardPlayedType, playerCard);
+        });
+    };
+
+    const roundWon = (winningPlayer: UserInfo): void => {
+        users.getAllOpenUsers().forEach((user) => {
+            user.connection.sendMessage(roundWonType, winningPlayer);
+        });
+    };
+
+    return {
+        requestCard,
+        cardPlayed,
+        roundWon
+    };
 };
 
-export default {
-    requestCard,
-    cardPlayed,
-    roundWon
-};
+export default gamePlayerCommunicator;

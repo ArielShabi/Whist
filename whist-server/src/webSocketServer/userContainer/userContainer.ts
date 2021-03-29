@@ -35,7 +35,7 @@ const userContainer = (): UserContainer => {
         return users.find(user => user.id === id)
     };
 
-    const getAllOpenUsers = (idToExclude: string): User[] => {
+    const getAllOpenUsers = (idToExclude?: string): User[] => {
         return users.filter(user => user.id != idToExclude && user.connection.isReady);
     }
 

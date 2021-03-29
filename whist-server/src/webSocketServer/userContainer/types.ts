@@ -9,5 +9,5 @@ export interface UserContainer {
     removeUser: (id: string) => boolean,
     editUser: (id: string, newUserData: Partial<User>) => User,
     getUser: (id: string) => User,
-    getAllOpenUsers: (idToExclude: string) => User[]
+    getAllOpenUsers: (idToExclude?: string) => User[]
 };
