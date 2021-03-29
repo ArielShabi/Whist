@@ -5,12 +5,12 @@ const suitProposingRoutine = (players: UserInfo[], votingRoutineCommunicator: Vo
     const proposingPlayers = [...players];
     let highestProposal: SuitProposal;
 
-    const proposalReceived = (player: UserInfo, proposal: SuitProposal) => {
-        const proposingPlayerIndex = proposingPlayers.findIndex(proposingPlayer => proposingPlayer.id === player.id);
+    const proposalReceived = (proposal: SuitProposal) => {
+        const proposingPlayerIndex = proposingPlayers.findIndex(proposingPlayer => proposingPlayer.id === proposal.player.id);
 
         const removeProposingUser = () => {
             proposingPlayers.slice(proposingPlayerIndex, 1);
-            votingRoutineCommunicator.proposalPlaced(player, null);
+            votingRoutineCommunicator.proposalPlaced({ ...proposal, number: -1 });
 
             if (proposingPlayers.length === 1) {
                 //FINISH
@@ -25,7 +25,7 @@ const suitProposingRoutine = (players: UserInfo[], votingRoutineCommunicator: Vo
 
             if (isHigherProposal) {
                 highestProposal = proposal;
-                votingRoutineCommunicator.proposalPlaced(player, proposal);
+                votingRoutineCommunicator.proposalPlaced(proposal);
             }
             else {
                 //ERROR

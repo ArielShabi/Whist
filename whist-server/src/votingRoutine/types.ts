@@ -3,12 +3,19 @@ import { CardSuits } from '../game/types';
 
 export interface VotingRoutineCommunicator {
     requestBet: (user: UserInfo) => void,
-    betPlaced: (bettingUser: UserInfo, bet: number) => void,
+    betPlaced: (bet: PlayerBet) => void,
     requestProposal: (user: UserInfo) => void,
-    proposalPlaced: (proposingUser: UserInfo, proposal?: SuitProposal) => void,
+    proposalPlaced: (proposal: SuitProposal) => void,
 }
 
 export type SuitProposal = {
+    player: UserInfo,
     number: number,
     suit: CardSuits
-}
+};
+
+
+export type PlayerBet = {
+    player: UserInfo,
+    bet: number;
+};
