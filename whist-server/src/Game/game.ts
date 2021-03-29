@@ -1,10 +1,10 @@
 
 import createBoard from './board';
 import { CardSuits, PlayerCard, PlayingUser } from './types';
-import playerCommunicator from './gamePlayerCommunicator';
 import { UserInfo } from '../types';
+import { GamePlayerCommunicator } from '../PlayersCommunicator/types';
 
-const game = (players: PlayingUser[], firstPlayer: UserInfo, strongSuit: CardSuits): any => {
+const game = (players: PlayingUser[], playerCommunicator: GamePlayerCommunicator, firstPlayer: UserInfo, strongSuit: CardSuits): any => {
     const board = createBoard(players, strongSuit);
     let nextPlayer = firstPlayer;
     const playersPoints = players.reduce((accumulator, player) => {
@@ -21,15 +21,16 @@ const game = (players: PlayingUser[], firstPlayer: UserInfo, strongSuit: CardSui
         const currentPlayer = players.find(player => player.id === card.player.id);
         currentPlayer.cards = currentPlayer.cards.filter(c => c.number !== card.number && c.suit !== card.suit);
 
-        playerCommunicator.cardPlayed(players, card);
+        playerCommunicator.cardPlayed(card);
 
         if (board.isBoardFull) {
-            completeRound();
+            const winner = completeRound();
 
             if (currentPlayer.cards.length === 0) {
                 //FINISH
             }
 
+            playerCommunicator.requestCard(winner);
             return;
         }
 
@@ -39,18 +40,17 @@ const game = (players: PlayingUser[], firstPlayer: UserInfo, strongSuit: CardSui
         playerCommunicator.requestCard(nextUser);
     };
 
-    const completeRound = (): void => {
+    const completeRound = (): PlayingUser => {
         const winnerInfo = board.getRoundWinner();
         const boardState = board.getBoardState();
-        playerCommunicator.roundWon(players, winnerInfo, boardState);
+        playerCommunicator.roundWon(winnerInfo);
         playersPoints[winnerInfo.id]++;
         board.resetBoard();
-        const winner = players.find(player => player.id === winnerInfo.id);
-        playerCommunicator.requestCard(winner);
+        return players.find(player => player.id === winnerInfo.id);
     }
 
     return {
-
+        playerPlayed
     };
 };
 
