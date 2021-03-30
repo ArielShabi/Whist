@@ -4,9 +4,14 @@ import { CardSuits, PlayerCard, PlayingUser } from './types';
 import { UserInfo } from '../types';
 import { GamePlayerCommunicator } from '../PlayersCommunicator/types';
 
-const game = (players: PlayingUser[], playerCommunicator: GamePlayerCommunicator, firstPlayer: UserInfo, strongSuit: CardSuits): any => {
+const gameRoutine = (players: PlayingUser[], playerCommunicator: GamePlayerCommunicator, firstPlayer: UserInfo, strongSuit: CardSuits): any => {
     const board = createBoard(players, strongSuit);
     let nextPlayer = firstPlayer;
+
+    const startRoutine = () => {
+        playerCommunicator.requestCard(firstPlayer);
+    };
+
     const playersPoints = players.reduce((accumulator, player) => {
         return accumulator[player.id] = 0;
     }, {});
@@ -42,7 +47,6 @@ const game = (players: PlayingUser[], playerCommunicator: GamePlayerCommunicator
 
     const completeRound = (): PlayingUser => {
         const winnerInfo = board.getRoundWinner();
-        const boardState = board.getBoardState();
         playerCommunicator.roundWon(winnerInfo);
         playersPoints[winnerInfo.id]++;
         board.resetBoard();
@@ -50,8 +54,9 @@ const game = (players: PlayingUser[], playerCommunicator: GamePlayerCommunicator
     }
 
     return {
+        startRoutine,
         playerPlayed
     };
 };
 
-export default game
+export default gameRoutine
