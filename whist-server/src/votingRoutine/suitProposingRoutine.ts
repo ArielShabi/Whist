@@ -5,6 +5,10 @@ const suitProposingRoutine = (players: UserInfo[], votingRoutineCommunicator: Vo
     const proposingPlayers = [...players];
     let highestProposal: SuitProposal;
 
+    const startRoutine = () => {
+        votingRoutineCommunicator.requestProposal(players[0]);
+    };
+
     const proposalReceived = (proposal: SuitProposal) => {
         const proposingPlayerIndex = proposingPlayers.findIndex(proposingPlayer => proposingPlayer.id === proposal.player.id);
 
@@ -38,6 +42,7 @@ const suitProposingRoutine = (players: UserInfo[], votingRoutineCommunicator: Vo
     };
 
     return {
+        startRoutine,
         proposalReceived
     };
 };
