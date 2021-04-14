@@ -5,7 +5,7 @@ const tryParseJson = <T>(str: string): T | null => {
     try {
         return JSON.parse(str);
     } catch (e) {
-        console.log(`Failed to parse ${str} error: ${e}`)
+        console.log(`Failed to parse ${str} error: ${e}`);
         return null;
     }
 };
