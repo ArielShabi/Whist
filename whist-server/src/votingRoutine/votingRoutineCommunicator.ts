@@ -3,7 +3,7 @@ import { UserInfo } from '../types';
 import { UserContainer } from '../webSocketServer/userContainer/types';
 import { BET_PLACED, PROPOSAL_PLACED, REQUEST_BET, REQUEST_PROPOSAL } from '../webSocketServer/messages/messageTypes';
 
-const votingRoutineCommunicator = (users: UserContainer): VotingRoutineCommunicator => {
+const createVotingRoutineCommunicator = (users: UserContainer): VotingRoutineCommunicator => {
     const requestBet = (user: UserInfo) => {
         users.getUser(user.id).connection.sendMessage(REQUEST_BET);
     };
@@ -32,4 +32,4 @@ const votingRoutineCommunicator = (users: UserContainer): VotingRoutineCommunica
     };
 };
 
-export default votingRoutineCommunicator;
+export default createVotingRoutineCommunicator;

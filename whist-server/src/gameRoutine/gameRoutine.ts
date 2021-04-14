@@ -4,7 +4,7 @@ import { CardSuits, PlayerCard, PlayingUser } from './types';
 import { UserInfo } from '../types';
 import { GamePlayerCommunicator } from '../PlayersCommunicator/types';
 
-const gameRoutine = (players: PlayingUser[], playerCommunicator: GamePlayerCommunicator, firstPlayer: UserInfo, strongSuit: CardSuits): any => {
+const createGameRoutine = (players: PlayingUser[], playerCommunicator: GamePlayerCommunicator, firstPlayer: UserInfo, strongSuit: CardSuits): any => {
     const board = createBoard(players, strongSuit);
     let nextPlayer = firstPlayer;
 
@@ -59,4 +59,4 @@ const gameRoutine = (players: PlayingUser[], playerCommunicator: GamePlayerCommu
     };
 };
 
-export default gameRoutine
+export default createGameRoutine;

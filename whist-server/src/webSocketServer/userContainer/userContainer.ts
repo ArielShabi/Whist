@@ -2,8 +2,8 @@ import uniqid from 'uniqid';
 import { User, UserContainer } from './types';
 import { getRandomName } from '../../utils';
 
-const userContainer = (): UserContainer => {
-    let users: User[] = [];
+const createUserContainer = (preAddedUsers: User[] = []): UserContainer => {
+    let users: User[] = [...preAddedUsers];
 
     const addUser = (connection: WebSocket): string => {
         const id: string = uniqid();
@@ -48,4 +48,4 @@ const userContainer = (): UserContainer => {
     };
 }
 
-export default userContainer;
+export default createUserContainer;
