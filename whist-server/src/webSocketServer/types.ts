@@ -1,1 +1,1 @@
-export type UserEventCallback = (unknown: unknown) => void
+export type UserEventCallback = (message: unknown) => void
