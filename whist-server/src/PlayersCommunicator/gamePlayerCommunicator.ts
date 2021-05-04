@@ -1,4 +1,4 @@
-import { PlayerCard } from '../game/types';
+import { PlayerCard } from '../gameRoutine/types';
 import { GamePlayerCommunicator } from './types';
 import { UserInfo } from '../types';
 import { cardPlayedType, requestCardType, roundWonType } from '../webSocketServer/messages/messageTypes'

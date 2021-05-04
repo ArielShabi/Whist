@@ -1,4 +1,4 @@
-import { PlayerCard } from '../game/types';
+import { PlayerCard } from '../gameRoutine/types';
 import { UserInfo } from '../types';
 
 export interface GamePlayerCommunicator {

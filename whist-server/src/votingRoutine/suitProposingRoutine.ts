@@ -1,7 +1,7 @@
 import { UserInfo } from '../types';
 import { SuitProposal, VotingRoutineCommunicator } from './types';
 
-const suitProposingRoutine = (players: UserInfo[], votingRoutineCommunicator: VotingRoutineCommunicator) => {
+const createSuitProposingRoutine = (players: UserInfo[], votingRoutineCommunicator: VotingRoutineCommunicator) => {
     const proposingPlayers = [...players];
     let highestProposal: SuitProposal;
 
@@ -47,4 +47,4 @@ const suitProposingRoutine = (players: UserInfo[], votingRoutineCommunicator: Vo
     };
 };
 
-export default suitProposingRoutine;
+export default createSuitProposingRoutine;

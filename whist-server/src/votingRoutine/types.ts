@@ -1,5 +1,5 @@
 import { UserInfo } from '../types';
-import { CardSuits } from '../game/types';
+import { CardSuits } from '../gameRoutine/types';
 
 export interface VotingRoutineCommunicator {
     requestBet: (user: UserInfo) => void,

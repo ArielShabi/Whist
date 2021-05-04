@@ -2,7 +2,7 @@ import { PlayerBet, SuitProposal, VotingRoutineCommunicator } from './types';
 import { NUMBER_OF_CARDS_PER_SUIT } from '../consts';
 import { UserInfo } from '../types';
 
-const bettingRoutine = (players: UserInfo[], votingRoutineCommunicator: VotingRoutineCommunicator, winningProposal: SuitProposal) => {
+const createBettingRoutine = (players: UserInfo[], votingRoutineCommunicator: VotingRoutineCommunicator, winningProposal: SuitProposal) => {
     let playersBets: PlayerBet[] = [];
 
     const isBetLegit = (playerBet: PlayerBet) => {
@@ -56,4 +56,4 @@ const bettingRoutine = (players: UserInfo[], votingRoutineCommunicator: VotingRo
     };
 };
 
-export default bettingRoutine;
+export default createBettingRoutine;
