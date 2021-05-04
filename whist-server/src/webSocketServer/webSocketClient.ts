@@ -1,4 +1,4 @@
-import { UserEventCallback, IWebSocketClient } from './types';
+import { UserEventCallback, IWebSocketClient, Message } from './types';
 import { tryParseJson } from '../utils';
 
 class WebSocketClient implements IWebSocketClient {
@@ -11,9 +11,9 @@ class WebSocketClient implements IWebSocketClient {
     }
 
     sendMessage(type: string, data?: unknown): void {
-        const message = JSON.stringify({ type, data });
+        const messageString = JSON.stringify({ type, data });
 
-        this.#connection.send(message);
+        this.#connection.send(messageString);
     }
 
     get isReady() {
@@ -46,7 +46,12 @@ class WebSocketClient implements IWebSocketClient {
             return;
         }
 
-        const message = tryParseJson(data);
+        const message = tryParseJson(data) as Message;
+        
+        if (!message?.type) {
+            //log
+            return;
+        }
 
         this.#events[type].forEach(callback => {
             callback(message);

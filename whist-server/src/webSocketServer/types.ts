@@ -1,5 +1,10 @@
 export type UserEventCallback = (message: unknown) => void
 
+export type Message = {
+    type: string;
+    data?: unknown
+}
+
 export interface IWebSocketClient {
     sendMessage(type: string, data?: unknown): void;
     on(event: string, callback: UserEventCallback): void;

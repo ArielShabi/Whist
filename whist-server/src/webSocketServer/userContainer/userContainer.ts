@@ -1,5 +1,6 @@
 import uniqid from 'uniqid';
 import { User, UserContainer } from './types';
+import WebSocketClient from '../webSocketClient';
 import { getRandomName } from '../../utils';
 
 const createUserContainer = (preAddedUsers: User[] = []): UserContainer => {
