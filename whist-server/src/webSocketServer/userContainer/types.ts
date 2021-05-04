@@ -1,7 +1,8 @@
+import { IWebSocketClient } from '../types';
 import { UserInfo } from '../../types';
 
 export type User = UserInfo & {
-    connection: WebSocketClient;
+    connection: IWebSocketClient;
 };
 
 export interface UserContainer {
