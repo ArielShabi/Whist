@@ -1,6 +1,9 @@
-export type UserEventCallback = (message: unknown) => void
+import { UserInfo } from '../types'
+
+export type UserEventCallback = (message: Message) => void
 
 export type Message = {
+    sender: UserInfo,
     type: string;
     data?: unknown
 }
