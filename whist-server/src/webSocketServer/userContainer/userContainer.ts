@@ -10,10 +10,11 @@ const createUserContainer = (preAddedUsers: User[] = []): UserContainer => {
         const id: string = uniqid();
         const name = getRandomName();
 
+        const userInfo = { id, name };
+
         users.push({
-            id,
-            connection: new WebSocketClient(connection),
-            name
+            ...userInfo,
+            connection: new WebSocketClient(connection, userInfo),
         });
 
         return id;

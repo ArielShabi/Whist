@@ -1,12 +1,15 @@
 import { UserEventCallback, IWebSocketClient, Message } from './types';
 import { tryParseJson } from '../utils';
+import { UserInfo } from '../types';
 
 class WebSocketClient implements IWebSocketClient {
     #connection: WebSocket;
     #events: { [key: string]: UserEventCallback[] }
+    #owner: UserInfo;
 
-    constructor(connection: WebSocket) {
+    constructor(connection: WebSocket, owner: UserInfo) {
         this.#connection = connection;
+        this.#owner = owner;
         this.#connection.onmessage = this.#onMessage;
     }
 
@@ -46,15 +49,15 @@ class WebSocketClient implements IWebSocketClient {
             return;
         }
 
-        const message = tryParseJson(data) as Message;
-        
+        const message = tryParseJson(data) as { type: string };
+
         if (!message?.type) {
-            //log
+            //error
             return;
         }
 
         this.#events[type].forEach(callback => {
-            callback(message);
+            callback({ ...message, sender: this.#owner });
         });
     };
 }
