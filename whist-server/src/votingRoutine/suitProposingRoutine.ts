@@ -1,4 +1,6 @@
+import { proposingReceivedProcessor } from '../messageProcessors';
 import { UserInfo } from '../types';
+import { Message } from '../webSocketServer/types';
 import { SuitProposal, VotingRoutineCommunicator } from './types';
 
 const createSuitProposingRoutine = (players: UserInfo[], votingRoutineCommunicator: VotingRoutineCommunicator) => {
@@ -9,7 +11,9 @@ const createSuitProposingRoutine = (players: UserInfo[], votingRoutineCommunicat
         votingRoutineCommunicator.requestProposal(players[0]);
     };
 
-    const proposalReceived = (proposal: SuitProposal) => {
+    const proposalReceived = (message: Message): void => {
+        const proposal = proposingReceivedProcessor(message);
+
         const proposingPlayerIndex = proposingPlayers.findIndex(proposingPlayer => proposingPlayer.id === proposal.player.id);
 
         const removeProposingUser = () => {
